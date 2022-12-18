@@ -23,13 +23,11 @@ public class Library {
                                 System.out.print("Author: ");
                                 String author = sc.next();
                                 System.out.print("Pages: ");
-                                do{
-                                        if(n>0){
-                                                System.out.println("Enter positive integer");
-                                        }
+                                pages = sc.nextInt();
+                                while(pages < 1){
+                                        System.out.println("Enter positive integer");
                                         pages = sc.nextInt();
-                                        n++;
-                                }while (pages<1);
+                                }
                                 System.out.print("Genre: ");
                                 String genre = sc.next();
                                 Novel novel=new Novel(name,author,pages,genre);
@@ -40,14 +38,12 @@ public class Library {
                                 String name = sc.next();
                                 System.out.print("Author: ");
                                 String author = sc.next();
-                                System.out.print("Pages: ");
-                                do{
-                                        if(n>0){
-                                                System.out.println("Enter positive integer");
-                                        }
+                               System.out.print("Pages: ");
+                                pages = sc.nextInt();
+                                while(pages < 1){
+                                        System.out.println("Enter positive integer");
                                         pages = sc.nextInt();
-                                        n++;
-                                }while (pages<1);
+                                }
                                 System.out.print("Quality paper: ");
                                 String quality = sc.next();
                                 ArtAlbum album = new ArtAlbum(name, author, pages, quality);
