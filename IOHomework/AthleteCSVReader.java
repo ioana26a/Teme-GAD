@@ -27,7 +27,6 @@ public class AthleteCSVReader {
                                 tokens[6]);
                         athletes.add(athlete);
                         line = bufReader.readLine();
-                        //LocalTime start = parseHelper("20:28");
                 }
                 return athletes;
         }
