@@ -7,8 +7,8 @@ public class Athlete implements Comparable<Athlete>{
         private String athleteName,countryCode,firstShootingRange,secondShootingRange,thirdShootingRange;
         private int athleteNumber;
         private LocalTime skiTimeResult;
-        public Athlete(String athleteName,int athleteNumber,String countryCode,String firstShootingRange,String secondShootingRange,
-                       String thirdShootingRange,LocalTime skiTimeResult){
+        public Athlete(int athleteNumber,String athleteName,String countryCode,LocalTime skiTimeResult,String firstShootingRange,String secondShootingRange,
+                       String thirdShootingRange){
                 this.athleteName=athleteName;
                 this.athleteNumber=athleteNumber;
                 this.countryCode=countryCode;
@@ -16,6 +16,10 @@ public class Athlete implements Comparable<Athlete>{
                 this.secondShootingRange=secondShootingRange;
                 this.thirdShootingRange=thirdShootingRange;
                 this.skiTimeResult=skiTimeResult;
+        }
+
+        public LocalTime getSkiTimeResult() {
+                return skiTimeResult;
         }
 
         @Override

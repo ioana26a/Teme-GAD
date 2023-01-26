@@ -3,24 +3,35 @@ package IOHomework;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AthleteCSVReader {
-                /*public List<TennisPlayer> readPlayers(Reader reader) throws IOException {
-                        ArrayList<TennisPlayer> players = new ArrayList<TennisPlayer>();
-                        BufferedReader bufReader = new BufferedReader(reader);
-                        String line = bufReader.readLine();
-                        while (line != null) {
-                                String[] tokens = line.split(",");
-                                TennisPlayer player = new TennisPlayer(
-                                        tokens[0],
-                                        Integer.parseInt(tokens[1]),
-                                        Integer.parseInt(tokens[2]),
-                                        tokens[3]);
-                                players.add(player);
-                                line = bufReader.readLine();
+        public List<Athlete> readPlayers(Reader reader) throws IOException {
+                ArrayList<Athlete> athletes = new ArrayList<Athlete>();
+                BufferedReader bufReader = new BufferedReader(reader);
+                String line = bufReader.readLine();
+                while (line != null) {
+                        String[] tokens = line.split(",");
+                        for (int j = 0; j < tokens.length; j++) {
+                                System.out.println(tokens[j]);
                         }
-                        return players;
-                }*/
+                        Athlete athlete = new Athlete(
+                                Integer.parseInt(tokens[0]),
+                                tokens[1],
+                                tokens[2],
+                                parseHelper(tokens[3]),
+                                tokens[4],
+                                tokens[5],
+                                tokens[6]);
+                        athletes.add(athlete);
+                        line = bufReader.readLine();
+                        //LocalTime start = parseHelper("20:28");
+                }
+                return athletes;
+        }
+        private static LocalTime parseHelper(String str) {
+                return LocalTime.parse("00:" + str);
+        }
 }
