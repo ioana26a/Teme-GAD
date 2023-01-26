@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AthleteCSVParser {
-        public List<Athlete> parsePlayers(InputStream csvInputStream) throws IOException {
+        public List<Athlete> parseAthletes(InputStream csvInputStream) throws IOException {
                 byte [] buffer = new byte [5];
                 int readBytes = csvInputStream.read(buffer);
                 StringBuilder builder = new StringBuilder();
@@ -22,7 +22,7 @@ public class AthleteCSVParser {
                 for(String line : lines){
                         //System.out.println(line);
                         String[] tokens = line.split(",");
-                        Athlete player = new Athlete(
+                        Athlete athlete = new Athlete(
                                 Integer.parseInt(tokens[0]),
                                 tokens[1],
                                 tokens[2],
@@ -30,7 +30,7 @@ public class AthleteCSVParser {
                                 tokens[4],
                                 tokens[5],
                                 tokens[6]);
-                        athletes.add(player);
+                        athletes.add(athlete);
                 }
                 return athletes;
         }
