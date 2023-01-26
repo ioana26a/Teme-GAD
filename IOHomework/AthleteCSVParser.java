@@ -18,19 +18,18 @@ public class AthleteCSVParser {
                 String readContent = builder.toString();
                 String[] lines = readContent.split("\n");
                 int i = 0;
-                ArrayList<Athlete> athletes = new ArrayList<Athlete>();
+                ArrayList<Athlete> athletes = new ArrayList<>();
                 for(String line : lines){
-                        //System.out.println(line);
                         String[] tokens = line.split(",");
-                        Athlete athlete = new Athlete(
-                                Integer.parseInt(tokens[0]),
+                        Athlete player = new Athlete(
+                                tokens[0],
                                 tokens[1],
                                 tokens[2],
                                 LocalTime.parse(tokens[3]),
                                 tokens[4],
                                 tokens[5],
                                 tokens[6]);
-                        athletes.add(athlete);
+                        athletes.add(player);
                 }
                 return athletes;
         }

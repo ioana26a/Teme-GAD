@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AthleteCSVReader {
-        public List<Athlete> readPlayers(Reader reader) throws IOException {
+        public List<Athlete> readAthletes(Reader reader) throws IOException {
                 ArrayList<Athlete> athletes = new ArrayList<Athlete>();
                 BufferedReader bufReader = new BufferedReader(reader);
                 String line = bufReader.readLine();
@@ -18,7 +18,7 @@ public class AthleteCSVReader {
                                 System.out.println(tokens[j]);
                         }
                         Athlete athlete = new Athlete(
-                                Integer.parseInt(tokens[0]),
+                                tokens[0],
                                 tokens[1],
                                 tokens[2],
                                 parseHelper(tokens[3]),
