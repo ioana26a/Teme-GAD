@@ -2,6 +2,7 @@ package IOHomework;
 
 import java.io.*;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Main {
         public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -16,13 +17,17 @@ public class Main {
                         AthleteCSVReader reader = new AthleteCSVReader();
                         List<Athlete> athletes = reader.readAthletes(new FileReader(fileName));
 
-                        Athlete simo = athletes.get(1);
-                        System.out.println(simo);
+                        for(Athlete a:athletes){
+                                a.shootingRange();
+                        }
 
-                        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("simo.obj"));
-                        Object o = ois.readObject();
-                        Athlete simo2 = (Athlete) o;
-                        System.out.println(simo2);
+                        TreeSet<Athlete> athletes1 = new TreeSet<>(new SkiTimeResultComparator());
+                        for(Athlete a:athletes){
+                                athletes1.add(a);
+                        }
+                        for(Athlete a:athletes1){
+                                System.out.println(a.getSkiTimeResult());
+                        }
 
                 } finally {
                         if (is != null) {
