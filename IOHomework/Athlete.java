@@ -3,7 +3,7 @@ package IOHomework;
 import org.jetbrains.annotations.NotNull;
 import java.time.LocalTime;
 
-public class Athlete implements Comparable<Athlete>{
+public class Athlete {
         private String athleteName,athleteNumber,countryCode,firstShootingRange,secondShootingRange,thirdShootingRange;
         private LocalTime skiTimeResult;
         public Athlete(String athleteNumber,String athleteName,String countryCode,LocalTime skiTimeResult,String firstShootingRange,String secondShootingRange,
@@ -33,9 +33,5 @@ public class Athlete implements Comparable<Athlete>{
                                 skiTimeResult.plusSeconds(10);
                         }
                 }
-        }
-        @Override
-        public int compareTo(@NotNull Athlete o) {
-                return this.skiTimeResult.compareTo(o.skiTimeResult);
         }
 }
