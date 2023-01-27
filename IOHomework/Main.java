@@ -22,16 +22,23 @@ public class Main {
                                 a.shootingRange();
                         }
 
-                        TreeSet<Athlete> athletes1 = new TreeSet<>(new SkiTimeResultComparator());
+                      TreeSet<Athlete> athletes1 = new TreeSet<>(new SkiTimeResultComparator());
                         for(Athlete a:athletes){
                                 athletes1.add(a);
                         }
+                        int i=0;
                         for(Athlete a:athletes1){
-                                System.out.println(a.getSkiTimeResult());
-                        }
-
-                        for(Athlete a:athletes1){
-                                System.out.println(a);
+                                if(i==0){
+                                        System.out.print("Winner - ");
+                                }
+                                if(i==1){
+                                        System.out.print("Runner-up - ");
+                                }
+                                if(i==2){
+                                        System.out.print("Third Place - ");
+                                }
+                                System.out.println(a.getAthleteName()+" - "+a.getSkiTimeResult());
+                                i++;
                         }
 
                 } finally {
