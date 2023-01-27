@@ -1,6 +1,7 @@
 package IOHomework;
 
 import java.io.*;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -11,8 +12,8 @@ public class Main {
                 try {
                         is = new FileInputStream(fileName);
 
-                        //AthleteCSVParser parser = new AthleteCSVParser();
-                        //List<Athlete> athletes1 = parser.parseAthletes(is);
+                        /*AthleteCSVParser parser = new AthleteCSVParser();
+                        List<Athlete> athletes1 = parser.parseAthletes(is);*/
 
                         AthleteCSVReader reader = new AthleteCSVReader();
                         List<Athlete> athletes = reader.readAthletes(new FileReader(fileName));
@@ -27,6 +28,10 @@ public class Main {
                         }
                         for(Athlete a:athletes1){
                                 System.out.println(a.getSkiTimeResult());
+                        }
+
+                        for(Athlete a:athletes1){
+                                System.out.println(a);
                         }
 
                 } finally {

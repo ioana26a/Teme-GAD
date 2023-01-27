@@ -2,7 +2,6 @@ package IOHomework;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +16,12 @@ public class AthleteCSVParser {
                 }
                 String readContent = builder.toString();
                 String[] lines = readContent.split("\n");
-                int i = 0;
                 ArrayList<Athlete> athletes = new ArrayList<>();
                 for(String line : lines){
                         String[] tokens = line.split(",");
-                        Athlete player = new Athlete(
-                                tokens[0],
-                                tokens[1],
-                                tokens[2],
-                                LocalTime.parse(tokens[3]),
-                                tokens[4],
-                                tokens[5],
-                                tokens[6]);
-                        athletes.add(player);
+                        Athlete athlete = new Athlete( tokens[0],tokens[1],tokens[2],AthleteCSVReader.parseHelper(tokens[3]),
+                                tokens[4],tokens[5],tokens[6]);
+                        athletes.add(athlete);
                 }
                 return athletes;
         }

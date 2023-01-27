@@ -1,6 +1,4 @@
 package IOHomework;
-
-import org.jetbrains.annotations.NotNull;
 import java.time.LocalTime;
 
 public class Athlete {
@@ -23,14 +21,38 @@ public class Athlete {
 
         @Override
         public String toString() {
-                return "No.athlete:"+athleteNumber+"\nName:"+athleteName+"\nCountry:"+athleteName+"\nTime result:"+skiTimeResult +
+                return "No.athlete:"+athleteNumber+"\nName:"+athleteName+"\nCountry:"+countryCode+"\nTime result:"+skiTimeResult +
                 "\nFirst shooting range:"+firstShootingRange+"\nSecond shooting range:"+secondShootingRange+
                         "\nThird shooting range:"+thirdShootingRange;
         }
+
+        @Override
+        public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                Athlete that = (Athlete) o;
+
+                if (athleteNumber != that.athleteNumber) return false;
+                if (!athleteName.equals(that.athleteName)) return false;
+                if (!countryCode.equals(that.countryCode)) return false;
+                if (!skiTimeResult.toString().equals(that.skiTimeResult.toString())) return false;
+                if (!firstShootingRange.equals(that.firstShootingRange)) return false;
+                if (!secondShootingRange.equals(that.secondShootingRange)) return false;
+                if (!thirdShootingRange.equals(that.thirdShootingRange)) return false;
+                return true;
+        }
+
         public void shootingRange() {
                 for (int i = 0; i < 5; i++) {
                         if(firstShootingRange.charAt(i) == 'o'){
-                                skiTimeResult.plusSeconds(10);
+                                skiTimeResult=skiTimeResult.plusSeconds(10);
+                        }
+                        if(secondShootingRange.charAt(i) == 'o'){
+                                skiTimeResult=skiTimeResult.plusSeconds(10);
+                        }
+                        if(thirdShootingRange.charAt(i) == 'o'){
+                                skiTimeResult=skiTimeResult.plusSeconds(10);
                         }
                 }
         }

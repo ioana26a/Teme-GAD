@@ -14,9 +14,6 @@ public class AthleteCSVReader {
                 String line = bufReader.readLine();
                 while (line != null) {
                         String[] tokens = line.split(",");
-                        for (int j = 0; j < tokens.length; j++) {
-                                System.out.println(tokens[j]);
-                        }
                         Athlete athlete = new Athlete(
                                 tokens[0],
                                 tokens[1],
@@ -30,7 +27,7 @@ public class AthleteCSVReader {
                 }
                 return athletes;
         }
-        private static LocalTime parseHelper(String str) {
+        public static LocalTime parseHelper(String str) {
                 return LocalTime.parse("00:" + str);
         }
 }
