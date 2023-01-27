@@ -18,6 +18,9 @@ public class Athlete {
         public LocalTime getSkiTimeResult() {
                 return skiTimeResult;
         }
+          public String getAthleteName() {
+                return athleteName;
+        }
 
         @Override
         public String toString() {
