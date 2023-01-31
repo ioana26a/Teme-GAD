@@ -2,9 +2,6 @@ package Resurse;
 
 import Cofetarie.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Collection;;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -16,10 +13,6 @@ public class Operatiuni {
 
         public static int getIdAngajatAutentificat() {
                 return idAngajatAutentificat;
-        }
-
-        public static void setIdAngajatAutentificat(int idAngajatAutentificat) {
-                Operatiuni.idAngajatAutentificat = idAngajatAutentificat;
         }
         public static boolean autentificare(Cofetarie cofetarie){
                 System.out.print("Username:");
@@ -64,12 +57,18 @@ public class Operatiuni {
                 }
                 return false;
         }
-        public static Produs cautareProdus(Cofetarie cofetarie, String denumire, String tip) {
-                if (cofetarie.getMeniuCofetarie().containsKey(tip)) {
-                        Collection<Produs> ex;
-                        ex = cofetarie.getMeniuCofetarie().get(tip);
-                        for (Produs p : ex) {
-                                if (p.getDenumire().equals(denumire))
+        public static Produs cautareProdus(Cofetarie cofetarie) {
+                String denumireProdus,tipProdus;
+                System.out.print("Denumire produs:");
+                denumireProdus = sc.next();
+                System.out.print("Tip produs:");
+                tipProdus = sc.next();
+                return cautare(cofetarie,denumireProdus,tipProdus);
+        }
+        public static Produs cautare(Cofetarie cofetarie,String denumireProdus,String tipProdus){
+                if (cofetarie.getMeniuCofetarie().containsKey(tipProdus)) {
+                        for (Produs p : cofetarie.getMeniuCofetarie().get(tipProdus)) {
+                                if (p.getDenumire().equals(denumireProdus))
                                         return p;
                         }
                         System.out.println("Produsul nu exista");
@@ -81,11 +80,7 @@ public class Operatiuni {
         private static boolean adaugareProduseComanda(Cofetarie cofetarie, HashMap<Produs,Integer> bon){
                 String optiune= sc.next();
                 while (!optiune.equals("ok")){
-                        System.out.print("Denumire produs:");
-                        String denumireProdus = sc.next();
-                        System.out.print("Tip produs:");
-                        String tipProdus = sc.next();
-                        Produs p = Operatiuni.cautareProdus(cofetarie, denumireProdus, tipProdus);
+                        Produs p = Operatiuni.cautareProdus(cofetarie);
                         int c = cantitate();
                         if (p != null && c > 0) {
                                 bon.put(p,c);

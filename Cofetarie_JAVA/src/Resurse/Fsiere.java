@@ -32,7 +32,7 @@ public class Fsiere {
                                                 System.out.println("Produsul nu poate avea pretul negativ sau egal cu 0.Nu se poate adauga");
                                                 continue;
                                         }
-                                        BazaDeDate.adaugareProdus(cof,denumire,pret,tip);
+                                        BazaDeDate.adaugareProdus(cof);
                                 }catch (NumberFormatException ex){
                                         System.out.println(ex);
                                 }

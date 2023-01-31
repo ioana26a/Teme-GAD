@@ -17,6 +17,10 @@ public class Produs {
                 return tip;
         }
 
+        public int getPret() {
+                return pret;
+        }
+
         public void setDenumire(String denumire) {
                 this.denumire = denumire;
         }

@@ -5,6 +5,7 @@ import Cofetarie.Cofetarie.Angajat;
 import Cofetarie.Produs;
 import Cofetarie.Comanda;
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BazaDeDate {
@@ -61,7 +62,7 @@ public class BazaDeDate {
                 try {
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery("select * from angajati");
-                        citireAngajat(cofetarie,rs);
+                        citireAngajat(cofetarie,rs);                    //pentru fiecare inregistrare adauga in cofetarie un angajat
                 } catch (SQLException e) {
                         System.out.println(e);
                 }
@@ -164,29 +165,64 @@ public class BazaDeDate {
                         }
                 }
         }
-        public static void adaugareProdus(Cofetarie cofetarie,String denumire,int pret,String tip){
-                if(!cofetarie.getMeniuCofetarie().put(tip, new Produs(denumire,pret,tip))){
-                        System.out.println("Produsul deja exista");
+        public static void adaugareProdus(Cofetarie cofetarie){
+                Produs p = detaliiProdus();                     //citeste detaliile unui produs pentru a-l adauga in cofetarie
+                if(p == null)
+                        return;
+                if(p!=null && !cofetarie.getMeniuCofetarie().put(p.getTip(), p)){       //acest produs exista deja in meniu
                         return;
                 }
+                cofetarie.getMeniuCofetarie().put(p.getTip(), p);
                 try {
                         Statement st = con.createStatement();
-                        st.execute("insert into Produse(Denumire,Descriere,Pret,tip)values('"+ denumire +"','"
-                                 + "','" + pret +"','" + tip + "');");
+                        st.execute("insert into Produse(Denumire,Descriere,Pret,tip)values('"+ p.getDenumire() +"','"
+                                 + "','" + p.getPret() +"','" + p.getTip() + "');");
                 } catch (SQLException e) {
                         System.out.println(e);
                 }
         }
-        public static void stergereProdus(Cofetarie cofetarie,Produs p) {
-                cofetarie.getMeniuCofetarie().remove(p.getTip(), p);
+        public static Produs detaliiProdus(){
+                String denumireProdus,tipProdus;
+                int pret;
+                System.out.print("Denumire:");
+                denumireProdus = sc.next();
+                System.out.print("Tip produs:");
+                tipProdus = sc.next();
                 try {
-                        Statement st = con.createStatement();
-                        st.execute("delete from Produse where denumire='" + p.getDenumire() + "';");
-                } catch (SQLException e) {
-                        System.out.println(e);
+                        pret = sc.nextInt();
+                        Produs p = new Produs(denumireProdus,pret,tipProdus);
+                        return p;
+                } catch (
+                        InputMismatchException ex) {
+                        System.out.println(ex);
+                }
+                return null;
+        }
+        public static void stergereProdus(Cofetarie cofetarie) {
+                Produs p = verificareProdus(cofetarie);                 //daca exista atunci il va sterge
+                if(p!=null) {
+                        cofetarie.getMeniuCofetarie().remove(p.getTip(), p);
+                        try {
+                                Statement st = con.createStatement();
+                                st.execute("delete from Produse where denumire='" + p.getDenumire() + "';");
+                        } catch (SQLException e) {
+                                System.out.println(e);
+                        }
                 }
         }
-        public static void actualizareDenumireProdus(Produs p,String denumireNoua) {
+        public static Produs verificareProdus(Cofetarie cofetarie){
+                String denumireProdus,tipProdus;
+                Produs p;
+                System.out.print("Denumire produs:");
+                denumireProdus = sc.next();
+                System.out.print("Tip produs:");
+                tipProdus = sc.next();
+                p = Operatiuni.cautareProdus(cofetarie);
+                return p;
+        }
+        public static void actualizareDenumireProdus(Cofetarie cofetarie) {
+                Produs p = Operatiuni.cautareProdus(cofetarie);
+                String denumireNoua = verificaredenumire();
                 p.setDenumire(denumireNoua);
                 try {
                         Statement st = con.createStatement();
@@ -194,9 +230,22 @@ public class BazaDeDate {
                 } catch (SQLException e) {
                         System.out.println(e);
                 }
-
         }
-        public static void actualizarePretProdus(Produs p,int pretNou){
+        public static String verificaredenumire(){
+                String denumireNoua;
+                System.out.print("Denumire noua produs:");
+                denumireNoua = sc.next();
+                if (denumireNoua.length() < 30) {
+                        System.out.println("Denumirea nu poate fi mai lunga de 30 de caractere");
+                        return null;
+                }
+                return denumireNoua;
+        }
+        public static void actualizarePretProdus(Cofetarie cofetarie){
+                int pretNou;
+                Produs p = Operatiuni.cautareProdus(cofetarie);
+                System.out.print("Pret nou:");
+                pretNou = sc.nextInt();
                 p.setPret(pretNou);
                 try {
                         Statement st = con.createStatement();

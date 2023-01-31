@@ -3,17 +3,14 @@ import Resurse.BazaDeDate;
 import Resurse.Operatiuni;
 
 import java.util.Calendar;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
         public static void main(String[] args) {
-                int meniu,varianta,pret;
+                int meniu,varianta;
                 Scanner sc=new Scanner(System.in);
-                String denumireProdus, tipProdus;
                 Cofetarie cofetarie;
                 Produs p;
-                Comanda comanda;
 
                 Calendar cal = Calendar.getInstance();
                 int ora = cal.get(Calendar.HOUR_OF_DAY);
@@ -48,79 +45,19 @@ public class Main {
                                                                                 BazaDeDate.inserareAngajat(cofetarie);
                                                                                 break;
                                                                         case 2:
-                                                                                /*if (Operatiuni.getIdAngajatAutentificat() == idAngajat) {
-                                                                                        BazaDeDate.stergereAngajat(cofetarie, idAngajat);
-                                                                                        Operatiuni.setIdAngajatAutentificat(0);
-                                                                                        varianta = 0;
-                                                                                        break;
-                                                                                }*/
                                                                                 BazaDeDate.stergereAngajat(cofetarie);
                                                                                 break;
                                                                         case 3:
-
-                                                                                System.out.print("Denumire:");
-                                                                                denumireProdus = sc.next();
-                                                                                System.out.print("Tip produs:");
-                                                                                tipProdus = sc.next();
-                                                                                try {
-                                                                                        pret = sc.nextInt();
-                                                                                } catch (
-                                                                                        InputMismatchException ex) {
-                                                                                        System.out.println(ex);
-                                                                                        System.out.println("Produsul nu a fost adaugat.");
-                                                                                        break;
-                                                                                }
-                                                                                BazaDeDate.adaugareProdus(cofetarie, denumireProdus, pret, tipProdus);
+                                                                                BazaDeDate.adaugareProdus(cofetarie);
                                                                                 break;
                                                                         case 4:
-                                                                                System.out.print("Denumire produs:");
-                                                                                denumireProdus = sc.next();
-                                                                                System.out.print("Tip produs:");
-                                                                                tipProdus = sc.next();
-                                                                                p = Operatiuni.cautareProdus(cofetarie, denumireProdus, tipProdus);
-                                                                                if (p != null) {
-                                                                                        String denumireNoua;
-                                                                                        System.out.print("Denumire noua produs:");
-                                                                                        denumireNoua = sc.next();
-                                                                                        if (denumireNoua.length() < 30) {
-                                                                                                System.out.println("Denumirea nu poate fi mai lunga de 30 de caractere");
-                                                                                                return;
-                                                                                        }
-                                                                                        BazaDeDate.actualizareDenumireProdus(p, denumireNoua);
-                                                                                }
-
+                                                                                BazaDeDate.actualizareDenumireProdus(cofetarie);
                                                                                 break;
                                                                         case 5:
-                                                                                System.out.print("Denumire produs:");
-                                                                                denumireProdus = sc.next();
-                                                                                System.out.print("Tip produs:");
-                                                                                tipProdus = sc.next();
-                                                                                p = Operatiuni.cautareProdus(cofetarie, denumireProdus, tipProdus);
-                                                                                if (p != null) {
-                                                                                        int pretNou;
-                                                                                        System.out.print("Pret nou:");
-                                                                                        try {
-                                                                                                pretNou = sc.nextInt();
-                                                                                                if (pretNou > 1) {
-                                                                                                        p.setPret(pretNou);
-                                                                                                        BazaDeDate.actualizarePretProdus(p, pretNou);
-                                                                                                        System.out.println("Pretul a fost actualizat.");
-                                                                                                } else
-                                                                                                        System.out.println("Pretul nu poate fi negativ sau egal cu 0");
-                                                                                        } catch (
-                                                                                                InputMismatchException ex) {
-                                                                                                System.out.println(ex);
-                                                                                        }
-                                                                                }
+                                                                                BazaDeDate.actualizarePretProdus(cofetarie);
                                                                                 break;
                                                                         case 6:
-                                                                                System.out.print("Denumire produs:");
-                                                                                denumireProdus = sc.next();
-                                                                                System.out.print("Tip produs:");
-                                                                                tipProdus = sc.next();
-                                                                                p = Operatiuni.cautareProdus(cofetarie, denumireProdus, tipProdus);
-                                                                                if (p != null)
-                                                                                        BazaDeDate.stergereProdus(cofetarie, p);
+                                                                                BazaDeDate.stergereProdus(cofetarie);
                                                                                 break;
                                                                         default:
 
