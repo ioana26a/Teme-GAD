@@ -9,6 +9,7 @@ public class Cofetarie {
         private ArrayList<Angajat> angajati = new ArrayList<>();
         private ArrayList<Client> clienti = new ArrayList<>();
         private MultiMap<String,Produs> meniuCofetarie= new MultiMap<>();
+        private MultiMap<Client,Comanda> comenzi= new MultiMap<>();
         public Cofetarie(String nume, int oraDeschidere, int oraInchidere) {
                 this.nume = nume;
                 this.oraDeschidere = oraDeschidere;
@@ -16,6 +17,10 @@ public class Cofetarie {
         }
         public MultiMap<String, Produs> getMeniuCofetarie() {
                 return meniuCofetarie;
+        }
+
+        public MultiMap<Client, Comanda> getComenzi() {
+                return comenzi;
         }
 
         public ArrayList<Client> getClienti() {
@@ -30,8 +35,12 @@ public class Cofetarie {
                 return "Cofetaria " + nume + " este deschisa in intervalul orar " + oraDeschidere + ":00-" + oraInchidere + ":00.";
         }
 
-        public boolean verificareProgram(int n) {
-                return (n >= oraDeschidere && n <= oraInchidere);
+        public void verificareProgram(int n) {
+                if(n >= oraDeschidere && n <= oraInchidere){
+                        System.out.println("Cofetaria " + nume + " este deschisa");
+                        return;
+                }
+                System.out.println("Cofetaria " + nume + " este inchisa");
         }
 
         public void vizualizareMeniu() {
@@ -42,9 +51,6 @@ public class Cofetarie {
                                 System.out.println(p);
                         }
                 }
-        }
-        public void plasareComanda(){
-
         }
         public class Angajat {
                 private String nume, prenume, utilizator, parola;
@@ -57,6 +63,19 @@ public class Cofetarie {
                         this.utilizator = utilizator;
                         this.parola = parola;
                 }
+
+                public String getNume() {
+                        return nume;
+                }
+
+                public String getPrenume() {
+                        return prenume;
+                }
+
+                public void setIdAngajat(int idAngajat) {
+                        this.idAngajat = idAngajat;
+                }
+
                 public String getUtilizator() {
                         return utilizator;
                 }

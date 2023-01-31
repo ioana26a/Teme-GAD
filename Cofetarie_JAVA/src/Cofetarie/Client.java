@@ -7,4 +7,9 @@ public class Client {
                 this.adresa=adresa;
                 this.nrTelefon=nrTelefon;
         }
+
+        public String getNrTelefon() {
+                return nrTelefon;
+        }
+
 }
