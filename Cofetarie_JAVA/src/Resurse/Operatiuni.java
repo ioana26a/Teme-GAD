@@ -135,8 +135,8 @@ public class Operatiuni {
                 }
                 catch (InputMismatchException ex){
                         System.out.println(ex);
+                        return -1;
                 }
-                return -1;
         }
         public static Comanda plasareComanda(Cofetarie cofetarie,Client client){
                 cofetarie.vizualizareMeniu();
