@@ -12,14 +12,11 @@ public class Main {
                 Cofetarie cofetarie;
                 Calendar cal = Calendar.getInstance();
                 int ora = cal.get(Calendar.HOUR_OF_DAY);
-                af();
                 if(!BazaDeDate.conectare())
                         return;
-
                 cofetarie = BazaDeDate.citireDateCofetarie();
                 if(cofetarie==null)
                         return;
-
                 BazaDeDate.citireDateAngajati(cofetarie);
                 BazaDeDate.citireDateProduse(cofetarie);
                 System.out.println(cofetarie.getAngajati().get(0));
@@ -64,7 +61,6 @@ public class Main {
                                                                 default:
                                                                         System.out.println("Varianta gresita");
                                                                         break;
-
                                                         }
                                                 }
                                                 while (varianta != 0);
@@ -75,8 +71,6 @@ public class Main {
                 }
                 while (meniu != 0);
                 BazaDeDate.deconectare();
-
-
         }
         private static int getMeniu(Scanner sc) {
                 int meniu;
