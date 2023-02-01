@@ -7,77 +7,89 @@ import java.util.Scanner;
 
 public class Main {
         public static void main(String[] args) {
-                int meniu,varianta;
-                Scanner sc=new Scanner(System.in);
+                int meniu, varianta;
+                Scanner sc = new Scanner(System.in);
                 Cofetarie cofetarie;
-                Produs p;
-
                 Calendar cal = Calendar.getInstance();
                 int ora = cal.get(Calendar.HOUR_OF_DAY);
-                if(BazaDeDate.conectare()) {
-                        System.out.println("Conectat la baza de date");
+                af();
+                if(!BazaDeDate.conectare())
+                        return;
 
-                        cofetarie = BazaDeDate.citireDateCofetarie();
-                        BazaDeDate.citireDateAngajati(cofetarie);
-                        BazaDeDate.citireDateProduse(cofetarie);
+                cofetarie = BazaDeDate.citireDateCofetarie();
+                if(cofetarie==null)
+                        return;
 
-                        do {
-                                meniu = getMeniu(sc);
-                                switch (meniu) {
-                                        case 1:
-                                                cofetarie.verificareProgram(ora);
-                                                break;
-                                        case 2:
-                                                cofetarie.vizualizareMeniu();
-                                                break;
-                                        case 3:
-                                                Operatiuni.comanda(cofetarie);
-                                                break;
-                                        case 4:
-                                                //adaugare client
-                                                break;
-                                        case 5:
-                                                if (Operatiuni.getIdAngajatAutentificat() != 0 || (Operatiuni.getIdAngajatAutentificat() == 0 && Operatiuni.autentificare(cofetarie)))
-                                                        do {
-                                                                varianta = getSubmeniu(sc);
-                                                                switch (varianta) {
-                                                                        case 1:
-                                                                                BazaDeDate.inserareAngajat(cofetarie);
-                                                                                break;
-                                                                        case 2:
-                                                                                BazaDeDate.stergereAngajat(cofetarie);
-                                                                                break;
-                                                                        case 3:
-                                                                                BazaDeDate.adaugareProdus(cofetarie);
-                                                                                break;
-                                                                        case 4:
-                                                                                BazaDeDate.actualizareDenumireProdus(cofetarie);
-                                                                                break;
-                                                                        case 5:
-                                                                                BazaDeDate.actualizarePretProdus(cofetarie);
-                                                                                break;
-                                                                        case 6:
-                                                                                BazaDeDate.stergereProdus(cofetarie);
-                                                                                break;
-                                                                        default:
+                BazaDeDate.citireDateAngajati(cofetarie);
+                BazaDeDate.citireDateProduse(cofetarie);
+                System.out.println(cofetarie.getAngajati().get(0));
+                do {
+                        meniu = getMeniu(sc);
+                        switch (meniu) {
+                                case 1:
+                                        cofetarie.verificareProgram(ora);
+                                        break;
+                                case 2:
+                                        cofetarie.vizualizareMeniu();
+                                        break;
+                                case 3:
+                                        Operatiuni.comanda(cofetarie);
+                                        break;
+                                case 4:
+                                        BazaDeDate.adaugareClient(cofetarie);
+                                        break;
+                                case 5:
+                                        if (Operatiuni.getIdAngajatAutentificat() != 0 || (Operatiuni.getIdAngajatAutentificat() == 0 && Operatiuni.autentificare(cofetarie)))
+                                                do {
+                                                        varianta = getSubmeniu(sc);
+                                                        switch (varianta) {
+                                                                case 1:
+                                                                        BazaDeDate.inserareAngajat(cofetarie);
+                                                                        break;
+                                                                case 2:
+                                                                        BazaDeDate.stergereAngajat(cofetarie);
+                                                                        break;
+                                                                case 3:
+                                                                        BazaDeDate.adaugareProdus(cofetarie);
+                                                                        break;
+                                                                case 4:
+                                                                        BazaDeDate.actualizareDenumireProdus(cofetarie);
+                                                                        break;
+                                                                case 5:
+                                                                        BazaDeDate.actualizarePretProdus(cofetarie);
+                                                                        break;
+                                                                case 6:
+                                                                        BazaDeDate.stergereProdus(cofetarie);
+                                                                        break;
+                                                                default:
+                                                                        System.out.println("Varianta gresita");
+                                                                        break;
 
-                                                                                System.out.println("Varianta gresita");
-                                                                                break;
-
-                                                                }
                                                         }
-                                                        while (varianta != 0);
-                                                break;
-                                        default:
-                                                break;
-                                }
+                                                }
+                                                while (varianta != 0);
+                                        break;
+                                default:
+                                        break;
                         }
-                        while (meniu != 0);
-                        BazaDeDate.deconectare();
                 }
-                else System.out.println("Nu s-a realizat conexiunea.Va rugam incercati din nou");
+                while (meniu != 0);
+                BazaDeDate.deconectare();
+
+
         }
 
+        public static void af(){
+
+                try {
+                        int a= Integer.parseInt("34g");
+                        System.out.println(a);
+                }catch (Exception ex)
+                {
+                        System.out.println("catch");
+                }
+                System.out.println("after catch");
+        }
         private static int getMeniu(Scanner sc) {
                 int meniu;
                 System.out.println("1.Verificare program ");

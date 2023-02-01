@@ -12,4 +12,16 @@ public class Client {
                 return nrTelefon;
         }
 
+        public String getNume() {
+                return nume;
+        }
+
+        public String getAdresa() {
+                return adresa;
+        }
+
+        @Override
+        public String toString() {
+                return "Nume:"+nume+"\nAdresa:"+adresa+"\nNumar telefon:"+nrTelefon;
+        }
 }

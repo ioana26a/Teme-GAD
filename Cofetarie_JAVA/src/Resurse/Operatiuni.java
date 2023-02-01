@@ -2,7 +2,6 @@ package Resurse;
 
 import Cofetarie.*;
 
-import java.util.Collection;;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -43,6 +42,18 @@ public class Operatiuni {
                         }
                 }
         }
+        public static Cofetarie.Angajat detaliiAngajat(Cofetarie cofetarie){
+                String nume, prenume, utilizator, parola;
+                System.out.print("Nume:");
+                nume = sc.next();
+                System.out.print("Prenume:");
+                prenume = sc.next();
+                System.out.print("Utilizator:");
+                utilizator = sc.next();
+                System.out.print("Parola:");
+                parola = sc.next();
+                return cofetarie.new Angajat(0,nume, prenume, utilizator, parola);
+        }
         public static Cofetarie.Angajat cautareAngajat(int idAngajat,Cofetarie cofetarie) {
                 for(Cofetarie.Angajat a:cofetarie.getAngajati()){
                         if(a.getIdAngajat() == idAngajat)
@@ -56,6 +67,22 @@ public class Operatiuni {
                                 return true;
                 }
                 return false;
+        }
+        public static Produs detaliiProdus(){
+                String denumireProdus,tipProdus;
+                int pret;
+                System.out.print("Denumire:");
+                denumireProdus = sc.next();
+                System.out.print("Tip produs:");
+                tipProdus = sc.next();
+                try {
+                        pret = sc.nextInt();
+                } catch (
+                        InputMismatchException ex) {
+                        System.out.println(ex);
+                        return null;
+                }
+                return new Produs(denumireProdus,pret,tipProdus);
         }
         public static Produs cautareProdus(Cofetarie cofetarie) {
                 String denumireProdus,tipProdus;
@@ -90,6 +117,16 @@ public class Operatiuni {
                         return true;
                 return false;
         }
+        public static String verificaredenumire(){
+                String denumireNoua;
+                System.out.print("Denumire noua produs:");
+                denumireNoua = sc.next();
+                if (denumireNoua.length() < 30) {
+                        System.out.println("Denumirea nu poate fi mai lunga de 30 de caractere");
+                        return null;
+                }
+                return denumireNoua;
+        }
         public static int cantitate() {
                 System.out.print("Cantitate:");
                 try{
@@ -109,7 +146,7 @@ public class Operatiuni {
                         for(Produs p : bon.keySet()){
                                 sumaTotala+=bon.get(p);
                         }
-                        Comanda com=new Comanda(1,sumaTotala,client,bon);
+                        Comanda com=new Comanda(client,sumaTotala,bon);
                         return com;
                 }
                 return null;
@@ -123,6 +160,7 @@ public class Operatiuni {
                                 BazaDeDate.adaugareComanda(c.getNrTelefon(),comanda);
                                 cofetarie.getComenzi().put(c,comanda);
                                 System.out.println("Comanda a fost plasata cu succes!");
+                                return;
                         }
                         System.out.println("Nu au fost adaugate produse in comanda");
                 }
@@ -138,6 +176,25 @@ public class Operatiuni {
                         }
                 }
                 return null;
+        }
+        public static boolean verificareClient(Cofetarie cofetarie,String telefon){
+                for(Client c:cofetarie.getClienti()){
+                        if(c.equals(telefon))
+                                return true;
+                }
+                return false;
+        }
+        public static Client detaliiClient(){
+                Client client;
+                String nume,telefon,adresa;
+                System.out.print("Nume:");
+                nume = sc.next();
+                System.out.print("Telefon:");
+                telefon = sc.next();
+                System.out.print("Adresa:");
+                adresa = sc.next();
+                client = new Client(nume,adresa,telefon);
+                return client;
         }
 }
 

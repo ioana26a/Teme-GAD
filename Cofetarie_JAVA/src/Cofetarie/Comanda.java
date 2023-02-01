@@ -3,13 +3,15 @@ import java.util.HashMap;
 
 public class Comanda {
         private int nrComanda,sumaTotala;
+        private static int contorComenzi=1;
         private Client client;
         private HashMap<Produs,Integer> bon;
-        public Comanda(int nrComanda, int sumaTotala, Client client, HashMap<Produs,Integer> bon){
-                this.nrComanda=nrComanda;
+        public Comanda(Client client, int sumaTotala, HashMap<Produs,Integer> bon){
+                this.nrComanda=contorComenzi;
                 this.sumaTotala=sumaTotala;
                 this.client=client;
                 this.bon=bon;
+                contorComenzi++;
         }
 
         public int getSumaTotala() {
@@ -27,5 +29,10 @@ public class Comanda {
                 }
                 st.setCharAt(st.lastIndexOf(","),' ');
                 return st;
+        }
+
+        @Override
+        public String toString() {
+                return "Detalii client\n"+client.toString() + "\nNumar comanda:"+nrComanda + "\nSuma totala:"+sumaTotala;
         }
 }
