@@ -78,18 +78,6 @@ public class Main {
 
 
         }
-
-        public static void af(){
-
-                try {
-                        int a= Integer.parseInt("34g");
-                        System.out.println(a);
-                }catch (Exception ex)
-                {
-                        System.out.println("catch");
-                }
-                System.out.println("after catch");
-        }
         private static int getMeniu(Scanner sc) {
                 int meniu;
                 System.out.println("1.Verificare program ");
